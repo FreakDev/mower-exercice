@@ -71,9 +71,9 @@ var tests = [
         assert.equal(e.position.y, 2);
         assert.equal(e.orientation, 2);
 
-        e = new Engine('0 2 E', 'A', 5, 5)        
+        e = new Engine('1 2 E', 'A', 5, 5)        
         e.tick()
-        assert.equal(e.position.x, 1);
+        assert.equal(e.position.x, 2);
         assert.equal(e.position.y, 2);
         assert.equal(e.orientation, 2);
 
@@ -116,6 +116,35 @@ var tests = [
         assert.equal(e.position.y, 1);
         assert.equal(e.orientation, 1);
         
+    }],
+    ['reach the end of a suite', function() {
+        var e;
+        e = new Engine('1 2 N', 'GA', 5, 5)
+        assert.equal(e.tick(), true)
+        assert.equal(e.tick(), false)
+    }],
+    ['reach left border', function() {
+        var e;
+        e = new Engine('1 1 W', 'AAGA', 5, 5)
+        e.tick();
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 1);
+        assert.equal(e.orientation, 0);
+
+        e.tick();
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 1);
+        assert.equal(e.orientation, 0);
+
+        e.tick();
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 1);
+        assert.equal(e.orientation, 1);
+
+        e.tick();
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 0);
+        assert.equal(e.orientation, 1);
     }]
 ]
 
