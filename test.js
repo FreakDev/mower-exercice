@@ -66,7 +66,7 @@ AADAADADDA`
         assert.equal(a.engineIndex, 0)        
         assert.equal(a.engines[0] instanceof Engine, true)
         assert.equal(a.engines[1] instanceof Engine, true)
-        assert.equal(a.engines[3] instanceof Engine, true)
+        assert.equal(a.engines[2] instanceof Engine, true)
         
         a = getInstance();
         a.feed(dataSets[2]);
