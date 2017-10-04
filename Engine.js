@@ -57,7 +57,7 @@ function Engine(initPos, ordersString, xMax, yMax) {
 }
 
 Engine.prototype.tick = function() {
-    var order = this.ordersString.slice(this.orderIndex, 1),
+    var order = this.ordersString.substr(this.orderIndex, 1),
         inc;
 
     switch (order) {
