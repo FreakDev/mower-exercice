@@ -6,7 +6,7 @@ function Engine(initPos, ordersString, xMax, yMax) {
         yInit;
 
     this.position = { x: 0, y: 0 };
-	this.orientation = 0; // 0 => N, 1 => W, 2 => S, 3 => E
+	this.orientation = 0; // 0 => W, 1 => S, 2 => E, 3 => N
     this.ordersString = '';
 	this.orderIndex = 0;
     this.limits = { 
@@ -25,7 +25,7 @@ function Engine(initPos, ordersString, xMax, yMax) {
         if (dataPos.length === 3) {
             xInit = parseInt(dataPos[0], 10);
             yInit = parseInt(dataPos[1], 10);
-            orientInit = ['N', 'W', 'S', 'E'].indexOf(dataPos[2]);
+            orientInit = ['W', 'S', 'E', 'N'].indexOf(dataPos[2]);
 
             if (!isNaN(xInit) && !isNaN(yInit) && orientInit !== -1) {
                 this.position.x = xInit;
@@ -56,6 +56,28 @@ function Engine(initPos, ordersString, xMax, yMax) {
 
 }
 
-Engine.prototype.tick = function() {}
+Engine.prototype.tick = function() {
+    var order = this.ordersString.slice(this.orderIndex, 1),
+        inc;
+
+    switch (order) {
+        case 'D':
+            this.orientation = this.orientation > 0 ? this.orientation - 1 : 3;
+            break;
+        case 'G':
+            this.orientation = this.orientation < 3 ? this.orientation + 1 : 0;
+            break;
+        case 'A': 
+            inc = Math.floor(this.orientation / 2) * 2 - 1;
+            if (this.orientation % 2 === 0) {
+                this.position.x += inc
+            } else {
+                this.position.y += inc
+            }
+            break;
+    }
+
+    this.orderIndex++;
+}
 
 module.exports = Engine;
