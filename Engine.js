@@ -57,8 +57,11 @@ function Engine(initPos, ordersString, xMax, yMax) {
 }
 
 Engine.prototype.tick = function() {
+    if (this.ordersString >= this.ordersString.length)
+        return;
+
     var order = this.ordersString.substr(this.orderIndex, 1),
-        inc;
+    inc;
 
     switch (order) {
         case 'D':
@@ -70,14 +73,19 @@ Engine.prototype.tick = function() {
         case 'A': 
             inc = Math.floor(this.orientation / 2) * 2 - 1;
             if (this.orientation % 2 === 0) {
-                this.position.x += inc
+                this.position.x > this.limits.x.min && this.position.x < this.limits.x.max && (this.position.x += inc)
             } else {
-                this.position.y += inc
+                this.position.y > this.limits.x.min && this.position.y < this.limits.x.max && (this.position.y += inc)
             }
             break;
     }
-
+            
     this.orderIndex++;
+    if (this.orderIndex < this.ordersString.length) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 module.exports = Engine;
