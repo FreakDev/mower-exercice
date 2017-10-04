@@ -94,7 +94,48 @@ AADAADADDA`,
         assert.throws(a.feed.bind(a, invalidDataSets[0]), /Invalid data/)
         assert.throws(a.feed.bind(a, invalidDataSets[1]), /Invalid data/)
         assert.throws(a.feed.bind(a, invalidDataSets[2]), /Invalid data/)
-    }]    
+    }],
+    ['test whole scenario', function tickTest() {
+
+        a = getInstance();
+        a.feed(
+`5 5
+1 2 N
+GAGAGAGAA
+3 3 E
+AADAADADDA`
+        );
+
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.engineIndex, 1)
+
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), true)
+        assert.equal(a.tick(), false)
+
+        assert.equal(a.engines[0].position.x, 1)
+        assert.equal(a.engines[0].position.y, 3)
+        assert.equal(a.engines[0].orientation, 3)
+
+        assert.equal(a.engines[1].position.x, 5)
+        assert.equal(a.engines[1].position.y, 1)
+        assert.equal(a.engines[1].orientation, 2)        
+    }]
 ]
 
 tests.forEach(function (test) {
