@@ -145,6 +145,30 @@ var tests = [
         assert.equal(e.position.x, 0);
         assert.equal(e.position.y, 0);
         assert.equal(e.orientation, 1);
+    }],
+    ['reach right border', function() {
+        var e;
+        e = new Engine('5 5 E', 'A', 5, 5)
+        e.tick();
+        assert.equal(e.position.x, 5);
+        assert.equal(e.position.y, 5);
+        assert.equal(e.orientation, 2);        
+    }],
+    ['reach bottom border', function() {
+        var e;
+        e = new Engine('0 0 S', 'A', 5, 5)
+        e.tick();
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 0);
+        assert.equal(e.orientation, 1);        
+    }],
+    ['reach top border', function() {
+        var e;
+        e = new Engine('5 5 N', 'A', 5, 5)
+        e.tick();
+        assert.equal(e.position.x, 5);
+        assert.equal(e.position.y, 5);
+        assert.equal(e.orientation, 3);
     }]
 ]
 
