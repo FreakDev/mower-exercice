@@ -6,8 +6,6 @@ function Area() {
     this.engineIndex = 0;
 }
 
-Area.prototype.currentEngine = function() {}
-
 Area.prototype.feed = function(data) {
 
     if (typeof data === 'string') {
@@ -42,8 +40,8 @@ Area.prototype.feed = function(data) {
             if (enginesSpec.length % 2 != 0) {
                 throw Error('Invalid data');
             } else {
-                for(i=0; i<(enginesSpec.length / 2); i++) {
-                    this.engines.push(new Engine(enginesSpec[i], enginesSpec[i + 1]));
+                for(i=0; i<enginesSpec.length; i += 2) {
+                    this.engines.push(new Engine(enginesSpec[i], enginesSpec[i + 1], this.dimensions.x, this.dimensions.y));
                 }
             }
         }        
@@ -52,8 +50,6 @@ Area.prototype.feed = function(data) {
     }
 
 }
-
-Area.prototype.addEngine = function() {}
 
 Area.prototype.tick = function() {}
 
