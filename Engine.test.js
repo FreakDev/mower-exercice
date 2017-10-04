@@ -88,7 +88,34 @@ var tests = [
         assert.equal(e.position.x, 1);
         assert.equal(e.position.y, 2);
         assert.equal(e.orientation, 2);
+    }],
+    ['execute a suite of orders', function() {
+        var e;
+        e = new Engine('1 2 N', 'GAGA', 5, 5)
+        e.tick();
+        assert.equal(e.orderIndex, 1)
+        assert.equal(e.position.x, 1);
+        assert.equal(e.position.y, 2);
+        assert.equal(e.orientation, 0);
 
+        e.tick();
+        assert.equal(e.orderIndex, 2);
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 2);
+        assert.equal(e.orientation, 0);
+
+        e.tick();
+        assert.equal(e.orderIndex, 3);
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 2);
+        assert.equal(e.orientation, 1);
+
+        e.tick();
+        assert.equal(e.orderIndex, 4);
+        assert.equal(e.position.x, 0);
+        assert.equal(e.position.y, 1);
+        assert.equal(e.orientation, 1);
+        
     }]
 ]
 
