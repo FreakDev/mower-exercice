@@ -8,11 +8,13 @@ this quick project is intended to handle instructions file for automatic mower
 
 Usage
 -----
+
 $> node index.js orders.txt
 
 The last argument in the previous command line must be a valid instructions file
 
 To run the tedt suites that comes with the code please run the follwing command :
+
 $> node test.js
 
 
