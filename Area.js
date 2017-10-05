@@ -58,6 +58,7 @@ Area.prototype.tick = function() {
     var shouldContinue = this.engines[this.engineIndex].tick();
 
     if (!shouldContinue) {
+        console.log(this.engines[this.engineIndex].position.x, this.engines[this.engineIndex].position.y, ['W', 'S', 'E', 'N'][this.engines[this.engineIndex].orientation]);
         this.engineIndex++;
 
         if (this.engineIndex >= this.engines.length) {

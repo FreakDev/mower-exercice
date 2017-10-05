@@ -1,14 +1,18 @@
 
 var Area = require('./Area');
 var Engine = require('./Engine');
+var fs = require('fs');
 
-// get file content
-
-var area = new Area();
-area.feed();
-
-function run () {
-    if (area.tick()) {
-        run();
+fs.readFile(process.argv[2], 'utf8', (err, data) => {
+    if (err) throw err;
+    
+    var area = new Area();
+    area.feed(data);
+    
+    function run () {
+        if (area.tick()) {
+            run();
+        }
     }
-}
+    run();
+});
