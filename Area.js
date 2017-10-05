@@ -51,6 +51,20 @@ Area.prototype.feed = function(data) {
 
 }
 
-Area.prototype.tick = function() {}
+Area.prototype.tick = function() {
+    if (this.engineIndex >= this.engines.length)
+        return false;
+
+    var shouldContinue = this.engines[this.engineIndex].tick();
+
+    if (!shouldContinue) {
+        this.engineIndex++;
+
+        if (this.engineIndex >= this.engines.length) {
+            return false;
+        }
+    }
+    return true;
+}
 
 module.exports = Area;
